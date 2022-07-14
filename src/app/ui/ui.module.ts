@@ -72,7 +72,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
     MatButtonModule,
     MatDialogModule,
     MatRippleModule,
-    MatIconModule,
+    MatIconModule
   ],
 })
-export class UiModule {}
+export class UiModule { }

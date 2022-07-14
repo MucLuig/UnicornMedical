@@ -1,1 +1,11 @@
 <!-- implement search form here -->
+<div [formGroup]="searchForm">
+    <input formControlName="seachField" />
+
+    <select formControlName="personType">
+        <option value="all">Patients + Practitioners</option>
+        <option value="patients">Patients</option>
+        <option value="Practitioners">practitioners</option>
+    </select>
+
+</div>
