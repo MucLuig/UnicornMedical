@@ -1,0 +1,47 @@
+<div *ngIf="data" class="detailDiv">
+    <mat-card>
+        <mat-card-title>
+            {{data.resourceType}} Detail Data
+        </mat-card-title>
+        <mat-card-content>
+
+            <div class="row">
+                <div class="column">Name</div>
+                <div class="column">{{data?.name}}</div>
+            </div>
+            <div class="row">
+                <div class="column">ID</div>
+                <div class="column">{{data?.id}}</div>
+            </div>
+            <div class="row">
+                <div class="column">ResourceType</div>
+                <div class="column">{{data.resourceType}}</div>
+            </div>
+            <ng-container *ngIf="data.resourceType === 'Patient'">
+                <div class="row">
+                    <div class="column">Birthdate</div>
+                    <div class="column">{{data?.birthDate | date:'dd.MM.yyyy'}}</div>
+                </div>
+                <div class="row">
+                    <div class="column">Address</div>
+                    <div class="column">{{data?.address}}</div>
+                </div>
+                <div class="row">
+                    <div class="column">Gender</div>
+                    <div class="column">{{data?.gender}}</div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="data.resourceType === 'Practitioner'">
+                <div class="row">
+                    <div class="column">Telecom</div>
+                    <div class="column">
+                        <div *ngFor="let telecom of data.telecom">
+                            {{telecom.system}}({{telecom.use}})&nbsp;{{telecom.value}}<br>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </mat-card-content>
+
+    </mat-card>
+</div>

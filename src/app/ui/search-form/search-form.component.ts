@@ -2,9 +2,8 @@ import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { FhirSearchFn} from '@red-probeaufgabe/types';
+import { FhirSearchFn } from '@red-probeaufgabe/types';
 import { ISearchResource } from '../models/search-resource.interface';
-import { isThisTypeNode } from 'typescript';
 
 @Component({
   selector: 'app-search',
@@ -13,10 +12,10 @@ import { isThisTypeNode } from 'typescript';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-  private seachSubject = new Subject<ISearchResource>();
+  private searchSubject = new Subject<ISearchResource>();
 
   @Output()
-  search: Observable<ISearchResource> = this.seachSubject.asObservable();
+  search: Observable<ISearchResource> = this.searchSubject.asObservable();
 
 
 
@@ -29,14 +28,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      seachField: ["", [Validators.pattern("[0-9a-zA-Z]+")]],
+      searchField: ["", [Validators.pattern("[0-9a-zA-Z]+")]],
       personType: "all"
     });
 
     // Suche nur wenn das form valid ist und zur optimierung debouncetime und distinctUntilChanged um die anzahl unnötiger api search calls zu reduzieren und die user experiancew zu erhöhen
     this.formSubscription = this.searchForm.valueChanges.pipe(filter(() => this.searchForm.valid == true), debounceTime(400), distinctUntilChanged()).subscribe(v => {
-    let searchResourceType: FhirSearchFn = v.personType === 'all' ? FhirSearchFn.SearchAll : v.personType === 'patients' ? FhirSearchFn.SearchPatients : FhirSearchFn.SearchPractitioners;
-    this.seachSubject.next({ name: v.seachField, resourceType: searchResourceType });
+      let searchResourceType: FhirSearchFn = v.personType === 'all' ? FhirSearchFn.SearchAll : v.personType === 'patients' ? FhirSearchFn.SearchPatients : FhirSearchFn.SearchPractitioners;
+      this.searchSubject.next({ name: v.searchField, resourceType: searchResourceType });
     });
   }
 
@@ -44,6 +43,5 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     // es handelt sich hier um ein longlive observable, so müssen wir unbedingt dafür sorgen unsubscribe aufzurufen, sonst kommt es zu mem-leaks!
     this.formSubscription.unsubscribe();
   }
-
 
 }

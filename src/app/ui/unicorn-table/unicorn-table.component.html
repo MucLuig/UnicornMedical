@@ -39,7 +39,7 @@
       </ng-container>
 
       <tr *matHeaderRowDef="columns" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: columns" class="ripple" mat-row (click)="showDetail(row)"></tr>
+      <tr *matRowDef="let row; columns: columns" class="ripple" mat-row (click)="selectTableRow(row)"></tr>
     </table>
   </div>
   <mat-paginator [length]="totalLength" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>

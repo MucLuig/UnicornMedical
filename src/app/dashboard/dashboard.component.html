@@ -3,6 +3,7 @@
     <app-search (search)="searchResource($event)"></app-search>
 
     <app-unicorn-table [columns]="columns" [entries]="entries$ | async" [isLoading]="isLoading"
-      [totalLength]="totalLength$ | async"></app-unicorn-table>
+      [totalLength]="totalLength$ | async" (selectItem)="selectedRow($event)"></app-unicorn-table>
+    <app-detail-view [data]="selectedEntry$ | async"></app-detail-view>
   </div>
 </app-grid-container>

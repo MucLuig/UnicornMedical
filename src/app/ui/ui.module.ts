@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
 import { DialogDetailRowComponent } from './dialog-detail-row/dialog-detail-row.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { DetailViewComponent } from './detail-view/detail-view.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
     UnicornTableComponent,
     DialogDetailRowComponent,
     SearchFormComponent,
+    DetailViewComponent,
   ],
   exports: [
     // Components
@@ -63,6 +65,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
     UnicornTableComponent,
     DialogDetailRowComponent,
     SearchFormComponent,
+    DetailViewComponent,
 
     // Modules
     MatCardModule,
@@ -73,6 +76,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
     MatDialogModule,
     MatRippleModule,
     MatIconModule
-  ],
+  ]
+  //  providers: [FhirUtilService]
 })
 export class UiModule { }

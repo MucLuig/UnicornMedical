@@ -1,11 +1,21 @@
 <!-- implement search form here -->
-<div [formGroup]="searchForm">
-    <input formControlName="seachField" />
+<div class="divSearch">
+    <form [formGroup]="searchForm">
+        Search:
 
-    <select formControlName="personType">
-        <option value="all">Patients + Practitioners</option>
-        <option value="patients">Patients</option>
-        <option value="Practitioners">practitioners</option>
-    </select>
+        <input class="search-input" formControlName="searchField" placeholder="Please enter the name to search" />
 
+
+        <select class="select-input" formControlName="personType">
+            <option value="all">Patients + Practitioners</option>
+            <option value="patients">Patients</option>
+            <option value="practitioners">Practitioners</option>
+        </select>
+
+
+    </form>
+    <div class="errorMsg"
+        *ngIf="searchForm.get('searchField').errors && searchForm.get('searchField').hasError('pattern')">
+        Only letters a to z and digits are valid for searching!
+    </div>
 </div>

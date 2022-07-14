@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IUnicornTableColumn } from '../models';
 import { IFhirPatient, IFhirPractitioner } from '@red-probeaufgabe/types';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-unicorn-table',
@@ -22,16 +23,24 @@ export class UnicornTableComponent implements OnInit {
     this.dataSource.data = value;
   }
 
-  constructor(private router: Router) { }
+  private selectItemSubject = new Subject<IFhirPatient | IFhirPractitioner>();
+
+  @Output()
+  selectItem: Observable<IFhirPatient | IFhirPractitioner> = this.selectItemSubject.asObservable();
+
+
+
+  constructor() { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  // TODO: leider nicht mein tag => event mit id and dashboard schicken dann mit api die datensatz holen dann mat_dialog in dashboard öffnen oder route navigation so würde ich weitermachen
-
-  showDetail(row: any) {
-    console.log(row);
-    alert("ResourceType:" + row.resourceType + " - Name:" + row.name[0].family + " " + row.name[0].given[0])
+  /**
+   * Will called if a row clicked by user and signal this via subject to the parent control
+   * @param row Datas of the patient or practitioner
+   */
+  selectTableRow(row: IFhirPatient | IFhirPractitioner) {
+    this.selectItemSubject.next(row);
   }
 }

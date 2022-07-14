@@ -2,16 +2,26 @@
   width: 100%;
   flex: 1;
   margin-right: 16px;
+  margin-left: 5px;
 }
+
 
 .select-input {
   flex: 0;
+  height: 22px;
 }
 
 form {
   width: 100%;
   display: flex;
   align-items: flex-end;
+  margin-bottom: 5px;
+}
+
+.errorMsg {
+  padding-left: 60px;
+  width: 100%;
+  color: red;
 }
 
 @media only screen and (max-width: 450px) {
@@ -28,4 +38,6 @@ form {
     flex: 1;
     width: 100%;
   }
+
+
 }
