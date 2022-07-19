@@ -1,18 +1,22 @@
 # UnicornMedical
 
 ## Anmerkung zur Lösung:
-Da die Implementierung der Detailansicht mir überlassen ist und ich es aus der Benutzerperspektive als sinnvoll erachte habe ich die Detail ansicht als Komponente in das Dashboard gepackt.
-Somit hat der Anwender nicht ein nervigen Dialog den er wegklicken muss gerade wenn er eine Person sucht aber es gibt diese mehrfach "Hans Müller". So ist er schnell in der Lage die 
+Da die Implementierung der Detailansicht mir überlassen ist und ich es aus der Benutzerperspektive als sinnvoll erachte habe ich die Detailansicht als Komponente in das Dashboard gepackt.
+Somit hat der Anwender nicht ein nerviger Dialog den er wegklicken muss gerade wenn er eine Person sucht aber es gibt diese mehrfach "Hans Müller". So ist er schnell in der Lage die 
 Datensätze durchzuklicken.
 
 ![Alt text](screenshot_ui.png)
 
 Die Komponenten search_form und detailView sind simple Präsentation Components oder PURE Components, sie haben keinen Zugriff auf den searchService nur auf die notwendigen models (interfaces). 
-Prinzipiell hätte man das falls die Zeit da wäre auch durch eigene models noch abstrahieren/entkoppen können dann wären die Komponenten univeral wiederverwendbar.
-Ausschliesslich die dashboard component (Smart Component) nutzt den service und besitzt die logik. Die Kommunikation zwischen den Komponenten erfolgt ausschließlich über Observables.
-Es wäre also möglich die ChangeDetectionStrategy im @Component decorator auf push zu stellen und die performance so etwas zu erhöhen.
-Das search habe ich etwas refactored um redundanten code zu vermeiden. Es erfolgt nun über eine eigene Methode und wird nicht beim deklarieren der 
-Observables ausgeführt. 
+Prinzipiell hätte man das falls die Zeit da wäre auch durch eigene models noch abstrahieren/entkoppeln können dann wären die Komponenten universal wiederverwendbar.
+Ausschließlich die dashboard Komponente (Smart Component) nutzt den searchService und besitzt die Logik. Die Kommunikation zwischen den Komponenten erfolgt ausschließlich über Observables.
+Es wäre also möglich die ChangeDetectionStrategy im @Component Decorator auf push zu stellen und die Performance so etwas zu erhöhen.
+Die Search Funktionalität des Dashboards habe ich etwas refactored um redundanten code zu vermeiden. Es erfolgt nun über eine eigene Methode und wird nicht beim Deklarieren der Observables ausgeführt. 
+
+### 4 Optionale Zusatzaufgabe: Erstellen von Unittests mit Jest für die SearchFacadeService
+Da Unit Tests Repeatable sein sollen: Also auf unveränderlichen, immer gleichen Daten beruhen sollten, was bei der Demo API evtl. nicht dauerhaft zu gewährleisten ist, werden diese Daten über Mock Implementationen des PatientSearchService und PractitionerSearchService bereitgestellt. Somit lässt sich SearchFacadeService die SearchFacadeService unabhängig von der API testen.
+Es wäre auch möglich gewesen über jest Mock Methoden und Objekte den gemockten Test zu realisieren und nicht über implementierte Mock Klassen. 
+Dieser Ansatz hat jedoch mehr Flexibilität, die Applikation kann theoretisch ohne fertiger/funktionsfähiger API entwickelt werden, Backend und Frontend Team können ein Stück weit parallel entwickeln.
 
 ## Überblick über die Testaufgabe
 
