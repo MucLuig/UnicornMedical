@@ -12,6 +12,7 @@ Prinzipiell hätte man das falls die Zeit da wäre auch durch eigene models noch
 Ausschließlich die dashboard Komponente (Smart Component) nutzt den searchService und besitzt die Logik. Die Kommunikation zwischen den Komponenten erfolgt ausschließlich über Observables.
 Es wäre also möglich die ChangeDetectionStrategy im @Component Decorator auf push zu stellen und die Performance so etwas zu erhöhen.
 Die Search Funktionalität des Dashboards habe ich etwas refactored um redundanten code zu vermeiden. Es erfolgt nun über eine eigene Methode und wird nicht beim Deklarieren der Observables ausgeführt. 
+Natürlich wäre kommunikation master/detail auch über einen Url Parameter (:id) und eine Childroute möglich gewesen (ActivatedRoute.paramMap observable). Sobald das Dashboard komplexer wird und mehr widgets enthält kommt man damit aber nicht mehr weiter und könnte dafür gegebenfalls z.b localStorage oder NgRx verwenden 
 
 ### 4 Optionale Zusatzaufgabe: Erstellen von Unittests mit Jest für die SearchFacadeService
 Da Unit Tests Repeatable sein sollen: Also auf unveränderlichen, immer gleichen Daten beruhen sollten, was bei der Demo API evtl. nicht dauerhaft zu gewährleisten ist, werden diese Daten über Mock Implementationen des PatientSearchService und PractitionerSearchService bereitgestellt. Somit lässt sich SearchFacadeService die SearchFacadeService unabhängig von der API testen.
